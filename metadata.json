@@ -1,6 +1,0 @@
-{
-  "name": "Nonogrid Deluxe — Picture Logic Puzzle",
-  "description": "Pimped picture logic puzzle game with daily challenges, adventure packs, tactile audio feedback, puzzle studio, and custom themes.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
