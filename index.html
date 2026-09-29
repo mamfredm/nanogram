@@ -342,6 +342,10 @@ noscript{display:block;padding:24px;text-align:center}
 .hul .ic{vertical-align:-2px;color:var(--muted)}
 @media (max-width:420px){.hdl{grid-template-columns:1fr;gap:2px 0}.hdl dd{margin-bottom:8px}.keys2{grid-template-columns:1fr}}
 
+.bests{grid-template-columns:repeat(4,1fr)}
+.best .lbl{font-size:10px;white-space:nowrap}
+@media (max-width:380px){.sizes button{padding:3px 6px}.sizes{gap:2px}}
+
 </style>
 </head>
 <body>
@@ -602,6 +606,21 @@ const PICS_RETRO={
   'Diamond Gem':'............|..########..|.##########.|############|############|.##########.|..########..|...######...|....####....|.....##.....|............|............',
   'Magic Potion':'............|....####....|....####....|.....##.....|...######...|..########..|.##########.|.##########.|.##########.|..########..|...######...|............'
 };
+const PICS_20=[
+  {name:"Blazing Sun",pic:".........##.........|.........##.........|..#......##.........|................#...|.........##.........|.......######.......|......########......|.....##########.....|.....###.##.###.....|###.############.###|###.############.###|.....##########.....|.....###.##.###.....|......########......|.......######.......|.........##.........|..##............##..|..#......##......#..|.........##.........|.........##.........",col:".........cc.........|.........cc.........|..c......cc.........|................c...|.........bb.........|.......bbbbbb.......|......bbbbbbbb......|.....bbbaaaabbb.....|.....bba.aa.abb.....|ccc.bbbaaaaaabbb.ccc|ccc.bbbaaaaaabbb.ccc|.....bbaaaaaabb.....|.....bbb.aa.bbb.....|......bbbbbbbb......|.......bbbbbb.......|.........bb.........|..cc............cc..|..c......cc......c..|.........cc.........|.........cc.........",pal:{"a": "#f97316", "b": "#fbbf24", "c": "#fcba01"}},
+  {name:"Lighthouse",pic:"....#....##....#....|........####........|.......######.......|.#.#.#..#..#..#.#.#.|..#.#...####...#.#..|.......######.......|.......######.......|.......######.......|.......######.......|......########......|......###..###......|......########......|......########......|......########......|......########......|......###..###......|......###..###......|.....####..####.....|...##############...|...##############...",col:"....f....ee....f....|........eeee........|.......dddddd.......|.f.f.f..c..c..f.f.f.|..f.f...cccc...f.f..|.......bbbbbb.......|.......aaaaaa.......|.......aaaaaa.......|.......aaaaaa.......|......bbbbbbbb......|......bbb..bbb......|......bbbbbbbb......|......aaaaaaaa......|......aaaaaaaa......|......aaaaaaaa......|......bbb..bbb......|......bbb..bbb......|.....bbbb..bbbb.....|...dddddddddddddd...|...dddddddddddddd...",pal:{"a": "#dc2626", "b": "#cbd5e1", "c": "#fbbf24", "d": "#57534e", "e": "#7f1d1d", "f": "#fde047"}},
+  {name:"Sailing Ship",pic:"..........###.......|.........####.......|........##..........|........##..........|.......####.........|......######........|......#######.......|.....########.......|.....#########......|....###########.....|...############.....|...#############....|..###############...|..################..|...####.##.##.###...|...#############....|....................|####################|##.##.##.##.##.##.##|####################",col:"..........fff.......|.........dfff.......|........sd..........|........sd..........|.......ssdt.........|......sssdtt........|......sssdttt.......|.....ssssdttt.......|.....ssssdtttt......|....sssssdttttt.....|...ssssssdttttt.....|...ssssssdtttttt....|..sssssssdttttttt...|..dddddddddddddddd..|...dddd.dd.dd.ddd...|...ddddddddddddd....|....................|wwwwwwwwwwwwwwwwwwww|ww.ww.ww.ww.ww.ww.ww|wwwwwwwwwwwwwwwwwwww",pal:{"d": "#78350f", "s": "#fde68a", "t": "#fca5a5", "f": "#ef4444", "w": "#0284c7"}},
+  {name:"Palm Island",pic:"....................|....................|.....#######...##...|...###...###.##..##.|.##..###############|.#..################|...###....#####...##|...#.......###.....#|..##........##.....#|..#........##......#|...........##.......|...........##.......|...........##.......|..........##........|..........##........|..........##........|.......######.......|...##############...|.##################.|####################",col:"....................|....................|.....ggggggg...gg...|...ggg...ggg.gg..gg.|.gg..ggggggggggggggg|.g..gggggggggggggggg|...ggg....ggggg...gg|...g.......ngn.....g|..gg........dd.....g|..g........dd......g|...........dd.......|...........dd.......|...........dd.......|..........dd........|..........dd........|..........dd........|.......ssddss.......|...ssssssddssssss...|.ssssssssssssssssss.|ssssssssssssssssssss",pal:{"s": "#fcd34d", "d": "#92400e", "g": "#16a34a", "n": "#451a03", "y": "#fcba01"}},
+  {name:"Ringed Planet",pic:"....................|..#.......#.....#...|................#...|....................|.........##.........|.......######.......|......#############.|.....##########..##.|.....##########..##.|....##############..|..##############....|.##..##########.....|.##..##########.....|.#############......|.......######.......|.#.......##.........|....................|...#................|...#....#......#....|....................",col:"....................|..y.......y.....y...|................y...|....................|.........pp.........|.......pppppp.......|......pppppppprrrrr.|.....qqqqqqqqqq..rr.|.....pppppppppp..rr.|....pppppppppppprr..|..rrqqqqqqqqqqqr....|.rr..pppppppprr.....|.rr..pppppprppp.....|.rrrrrrrrqqqqq......|.......pppppp.......|.y.......pp.........|....................|...y................|...y....y......y....|....................",pal:{"p": "#f59e0b", "q": "#fb923c", "r": "#8b5cf6", "y": "#fcba01"}},
+  {name:"Fox Face",pic:"....................|..#.................|..##............#...|..###..........##...|..####........###...|.#################..|.##################.|.##################.|.##################.|.##################.|.##################.|.##################.|.##################.|..################..|....####.##.####....|.....##########.....|......########......|.......######.......|.........##.........|....................",col:"....................|..o.................|..oo............o...|..ooo..........oo...|..ooio........oio...|.ooooooooooooooooo..|.oooooooooooooooooo.|.oooooooooooooooooo.|.oooooooooooooooooo.|.oooonnoooooonnoooo.|.oooonnoooooonnoooo.|.oooooooooooooooooo.|.wwwwwwwwwwwwwwwwww.|..wwwwwwwwwwwwwoww..|....wwww.ww.wwow....|.....owwwwwwwoo.....|......owwwwwoo......|.......ownnoo.......|.........nn.........|....................",pal:{"o": "#f97316", "i": "#fbcfe8", "w": "#ffedd5", "n": "#1c1917"}},
+  {name:"Hot Air Balloon",pic:"....................|.......######.......|.###.##########.....|###############.....|.###############....|....############....|....############....|....############....|....############....|....############....|.....##########.....|.....##########.....|......########......|.......######.......|........####...####.|........####...####.|........#..#........|........#..#........|.......######.......|.......######.......",col:"....................|.......ryyyyr.......|.ccc.yrryyyyrry.....|cccccyrryyyyrry.....|.cccyyrryyyyrryy....|....yyrryyyyrryy....|....yyrryyyyrryy....|....yyrryyyyrryy....|....yyrryyyyrryy....|....yyrryyyyrryy....|.....yrryyyyrry.....|.....yrryyyyrry.....|......rryyyyrr......|.......ryyyyr.......|........yyyy...cccc.|........yyyy...cccc.|........d..d........|........d..d........|.......dddddd.......|.......dddddd.......",pal:{"r": "#ef4444", "y": "#fcba01", "d": "#78350f", "c": "#7dd3fc"}},
+  {name:"Windmill",pic:"..##............##..|...##.........###...|...###........##....|.....##......##.....|..#...##....##..#...|.......######.......|........####........|.......######.......|........####........|.......######.......|......########......|.....####..####.....|....##.######.##....|...##..######..##...|..##...######...##..|......########......|......###..###......|......###..###......|......###..###......|####################",col:"..ww............ww..|...ww.........www...|...www........ww....|.....ww......ww.....|..w...ww....ww..w...|.......wweeww.......|........wwww........|.......eewwee.......|........wwww........|.......wwbbww.......|......wwbbbbww......|.....wwbb..bbww.....|....ww.bbbbbb.ww....|...ww..bbbbbb..ww...|..ww...bbbbbb...ww..|......bbbbbbbb......|......bbb..bbb......|......bbb..bbb......|......bbb..bbb......|gggggggggggggggggggg",pal:{"b": "#d6d3d1", "e": "#b91c1c", "w": "#92400e", "g": "#16a34a"}}
+];
+function createPuzzleDef20(id,p,packId){
+  const grid=picGrid(p.pic),rows=p.col.split('|');
+  const cm=grid.map((row,r)=>row.map((v,c)=>v?(p.pal[rows[r][c]]||'#2b3428'):'transparent'));
+  return {id,name:p.name,size:20,solution:grid,colorMap:cm,packId};
+}
 function createPuzzleDef(id,name,size,str,packId){
   const grid=picGrid(str);
   return {id,name,size,solution:grid,colorMap:generateColorMap(name,grid),packId};
@@ -613,6 +632,8 @@ const PUZZLE_PACKS=[
    puzzles:Object.entries(PICS_10).map(([name,str],i)=>createPuzzleDef('fauna_'+i,name,10,str,'fauna'))},
   {id:'master',title:'Grand Expeditions',subtitle:'8 intricate 15×15 tapestries',size:15,icon:'compass',
    puzzles:Object.entries(PICS_15).map(([name,str],i)=>createPuzzleDef('master_'+i,name,15,str,'master'))},
+  {id:'giant',title:'Epic Canvases',subtitle:'8 large 20×20 masterpieces',size:20,icon:'trophy',
+   puzzles:PICS_20.map((p,i)=>createPuzzleDef20('giant_'+i,p,'giant'))},
   {id:'retro',title:'Arcade Relics',subtitle:'Retro icons & 8-bit treasures',size:10,icon:'gamepad2',
    puzzles:Object.entries(PICS_RETRO).map(([name,str],i)=>createPuzzleDef('retro_'+i,name,str.split('|').length,str,'retro'))}
 ];
@@ -696,7 +717,7 @@ function getRandomPuzzleBySize(size,excludeId){
   const cand=pack.puzzles.filter(p=>p.id!==excludeId);
   return cand.length>0?cand[Math.floor(Math.random()*cand.length)]:pack.puzzles[0];
 }
-if(typeof module!=='undefined')module.exports={cluesFor,lineSatisfied,solveLine,logicSolve,isUniquelySolvable,findLogicalHint,PUZZLE_PACKS,generateDailyPuzzle,picGrid,PICS_5,PICS_10,PICS_15,PICS_RETRO};
+if(typeof module!=='undefined')module.exports={cluesFor,lineSatisfied,solveLine,logicSolve,isUniquelySolvable,findLogicalHint,PUZZLE_PACKS,generateDailyPuzzle,picGrid,PICS_5,PICS_10,PICS_15,PICS_20,PICS_RETRO};
 
 /* ===== Icons (Lucide-style, inline) ===== */
 const ICONS={
@@ -998,7 +1019,7 @@ function mainHTML(){
       (done?'<span class="tag emerald">'+ic('checkcircle','i14')+'Done</span>':'<span class="tag amber mono">'+ic('flame','i14 fill')+'Streak: '+streaks().current+'</span>')+'</div></div>';
   }else{
     h+='<div class="titlebar"><div class="tl"><span class="ptitle">'+(S.solved?esc(p.name):'Mystery '+p.size+'×'+p.size)+'</span>'+(p.author?'<span class="dim sm">by '+esc(p.author)+'</span>':'')+'</div>'+
-      '<div class="sizes">'+[5,10,15].map(s=>'<button data-a="size" data-v="'+s+'" class="'+(p.size===s&&S.mode==='free'?'on':'')+'">'+s+'×'+s+'</button>').join('')+'</div></div>';
+      '<div class="sizes">'+[5,10,15,20].map(s=>'<button data-a="size" data-v="'+s+'" class="'+(p.size===s&&S.mode==='free'?'on':'')+'">'+s+'×'+s+'</button>').join('')+'</div></div>';
   }
   if(S.helpTip&&!S.hintReason&&!S.solved)h+='<div class="tip-note">'+ic('help','i14 amber')+'<span>New to nonograms?</span><button data-a="open" data-v="help" class="tip-btn">How to play</button><button data-a="tipclose" class="icon-btn tip-x" aria-label="Dismiss">'+ic('x','i14')+'</button></div>';
   if(S.hintReason)h+='<div class="hint-note">'+ic('help','i14 amber')+'<span>'+esc(S.hintReason)+'</span></div>';
@@ -1028,7 +1049,7 @@ function statsModal(){
      '<div class="tile"><div class="big mono amber-t">'+ic('flame','i16 fill')+'<span>'+sk.current+'</span></div><div class="lbl">Daily Streak</div></div>'+
      '<div class="tile"><div class="big mono">'+sk.longest+'</div><div class="lbl">Longest Streak</div></div></div>';
     body+='<div class="box"><div class="boxh">'+ic('clock','i14 dim')+'<span>Personal Best Times</span></div><div class="bests">'+
-      [5,10,15].map(s=>'<div class="best"><div class="lbl">'+s+'×'+s+' Grid</div><div class="mono bv">'+(st.best[s]?fmt(st.best[s].t):'—')+'</div></div>').join('')+'</div></div>';
+      [5,10,15,20].map(s=>'<div class="best"><div class="lbl">'+s+'×'+s+' Grid</div><div class="mono bv">'+(st.best[s]?fmt(st.best[s].t):'—')+'</div></div>').join('')+'</div></div>';
     if(recent.length>=2){
       body+='<div class="box"><div class="boxh spread"><span>Recent Solve Times</span><span class="mono dim xs">Avg: '+fmt(avg)+'</span></div><div class="bars">'+
         recent.map(s=>'<div class="bar-col"><div class="tip mono">'+fmt(s.t)+' ('+s.size+'×'+s.size+')</div><div class="bar'+(s.clean?' clean':'')+'" style="height:'+Math.max(8,s.t/maxT*100)+'%"></div></div>').join('')+
@@ -1052,7 +1073,7 @@ function packsModal(){
   const done=new Set();
   Object.values(S.stats.packProgress).forEach(ids=>ids.forEach(i=>done.add(i)));
   const pack=PUZZLE_PACKS.find(p=>p.id===S.packId)||PUZZLE_PACKS[0];
-  const color={sparkles:'amber',trees:'emerald',compass:'sky',gamepad2:'purple'};
+  const color={sparkles:'amber',trees:'emerald',compass:'sky',gamepad2:'purple',trophy:'accent'};
   const tabs=PUZZLE_PACKS.map(pk=>{
     const c=pk.puzzles.filter(p=>done.has(p.id)).length;
     return '<button data-a="packtab" data-v="'+pk.id+'" class="ptab'+(pk.id===S.packId?' on':'')+'">'+ic(pk.icon,'i20 '+color[pk.icon])+
@@ -1082,11 +1103,14 @@ function settingsModal(){
 }
 
 function studioModal(){
-  const s=S.studio,n=s.size,cs=n<=5?36:n<=10?24:16;
+  const s=S.studio,n=s.size;
+  const base=n<=5?36:n<=10?24:n<=15?16:13;
+  const avail=Math.min(512,window.innerWidth-32)-32-16-52;
+  const cs=Math.max(9,Math.min(base,Math.floor(avail/n)));
   const cl=cluesFor(s.grid);
   let h=modalHead('Puzzle Studio','<span class="dot purple"></span>','studio');
   h+='<div class="sbar"><input id="st-name" type="text" value="'+esc(s.name)+'" placeholder="Puzzle Name" maxlength="24" aria-label="Puzzle name">'+
-    '<div class="sizes2">'+[5,10,15].map(x=>'<button data-a="st-size" data-v="'+x+'" class="'+(n===x?'on':'')+'">'+x+'×'+x+'</button>').join('')+'</div>'+
+    '<div class="sizes2">'+[5,10,15,20].map(x=>'<button data-a="st-size" data-v="'+x+'" class="'+(n===x?'on':'')+'">'+x+'×'+x+'</button>').join('')+'</div>'+
     '<button data-a="st-clear" class="clr">'+ic('eraser','i14')+'<span>Clear</span></button></div>';
   h+='<div class="mbody center"><div class="sboard" style="--cs:'+cs+'px"><div class="scc" style="margin-left:calc(48px + 2px);grid-template-columns:repeat('+n+','+cs+'px)">'+
     cl.cols.map(c=>'<div class="sc">'+c.map(x=>'<span>'+x+'</span>').join('')+'</div>').join('')+'</div>'+
@@ -1202,8 +1226,8 @@ function helpMore(){
   '<p class="cap">Change the style under Themes &amp; settings.</p></section>'+
 
   '<section class="hsec"><h3>Where to play</h3><dl class="hdl">'+
-  '<dt>'+chipi('sparkles','Play')+'</dt><dd>A random puzzle in the size you choose: 5&times;5, 10&times;10 or 15&times;15. New players should start with 5&times;5.</dd>'+
-  '<dt>'+chipi('layers','Packs')+'</dt><dd>Hand-made puzzle collections. Solved ones get a tick.</dd>'+
+  '<dt>'+chipi('sparkles','Play')+'</dt><dd>A random puzzle in the size you choose: 5&times;5, 10&times;10, 15&times;15 or 20&times;20. New players should start with 5&times;5.</dd>'+
+  '<dt>'+chipi('layers','Packs')+'</dt><dd>Hand-made puzzle collections, from tiny 5&times;5 pictures up to big 20&times;20 canvases. Solved ones get a tick.</dd>'+
   '<dt>'+chipi('calendar','Daily')+'</dt><dd>One new puzzle every day, 10&times;10 on weekdays and 15&times;15 on weekends. Solve on consecutive days to build a streak.</dd>'+
   '<dt>'+chipi('brush','Studio')+'</dt><dd>Draw your own picture. &ldquo;Test Solvability&rdquo; tells you if it can be solved by logic alone. Then play it or copy its code.</dd></dl></section>'+
 
@@ -1212,6 +1236,7 @@ function helpMore(){
   '<li>The '+ic('moon','i14')+' button switches between light and dark. More looks are under Themes &amp; settings.</li>'+
   '<li><b>Auto-cross</b> fills in crosses for you when a line is complete. You can turn it off in the settings.</li>'+
   '<li>After solving, choose <b>View Picture</b> to admire the finished artwork.</li>'+
+  '<li>20&times;20 puzzles are big. On a phone they are more comfortable in landscape mode, or on a tablet or computer.</li>'+
   '<li>Your progress and stats are saved in this browser only. Nothing is sent anywhere. Clearing your browser data resets them.</li></ul></section>';
 }
 
